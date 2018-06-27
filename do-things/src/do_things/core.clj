@@ -27,9 +27,22 @@
    :size (:size part)})
 
 (defn symmetrize-body-parts
+  "Take asymmetric body parts and symmetrize it"
   [asym-body-parts]
-  (set (into asym-body-parts
-         (map matching-part asym-body-parts))))
+  (into asym-body-parts
+    (set (map matching-part asym-body-parts))))
+
+(defn hit
+  "Randomly hit a body part"
+  [asym-body-parts]
+  (let [sym-body-part (symmetrize-body-parts asym-body-parts)
+        acc-body-size (reduce + (map :size sym-body-part))
+        target (rand acc-body-size)]
+    (loop [[part & remaining] sym-body-part
+           acc-target (:size part)]
+      (if (> acc-target target)
+        part
+        (recur remaining (+ acc-target (:size (first remaining))))))))
 
 (defn foo
   "I don't do a whole lot."
