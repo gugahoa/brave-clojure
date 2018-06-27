@@ -48,3 +48,20 @@
   "I don't do a whole lot."
   [x]
   (println x "Hello, World!"))
+
+; Exercises:
+
+; 2. Write a function that takes a number and adds 100 to it.
+(defn add100
+  [num]
+  (+ num 100))
+
+; 3. Write a function, dec-maker, that works exactly like the function inc-maker except with subtraction:
+(defn dec-maker
+  [n]
+  #(- % n))
+
+; 4. Write a function, mapset, that works like map except the return value is a set: 
+(defn mapset
+  [f collection]
+  (set (map f collection)))
